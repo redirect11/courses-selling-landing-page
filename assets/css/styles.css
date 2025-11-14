@@ -228,11 +228,66 @@ body {
   background: rgba(96,165,250,0.1);
 }
 
+/* Detailed table (screenshot-style) - dark theme to match page */
+.detailed-table-wrap{margin:28px auto;display:flex;justify-content:center}
+.detailed{
+  width:100%;
+  max-width:980px;
+  border-collapse:separate;
+  border-spacing:0;
+  background:linear-gradient(180deg, rgba(3,6,17,0.6), rgba(2,8,20,0.65));
+  color:var(--white);
+  border-radius:12px;
+  overflow:hidden;
+  box-shadow:0 8px 20px rgba(15,23,42,0.2);
+  border:2px solid rgba(96,165,250,0.2);
+}
+.detailed thead th{
+  background:linear-gradient(90deg, rgba(96,165,250,0.2), rgba(110,231,183,0.2));
+  color:var(--white);
+  padding:16px;
+  font-weight:700;
+  text-align:center;
+  text-transform:uppercase;
+  letter-spacing:0.05em;
+}
+.detailed td{
+  padding:14px 16px;
+  text-align:center;
+  border-bottom:1px solid rgba(255,255,255,0.05);
+  background:transparent;
+  font-size:0.95rem;
+}
+.detailed tr:nth-child(even) td{background:rgba(255,255,255,0.02)}
+.detailed tr:hover td{background:rgba(96,165,250,0.1)}
+.detailed tr:last-child td{border-bottom:none}
+
+/* add internal cell borders to match .features */
+.detailed th,.detailed td{border:1px solid rgba(255,255,255,0.05)}
+.detailed thead th{border-top:0;border-left:0;border-right:0}
+.detailed tbody td{border-left:0;border-right:0}
+.detailed .cell-title{color:var(--muted);font-weight:600;margin-bottom:8px}
+.detailed .cell-meta{font-weight:700;margin-bottom:6px;color:var(--white)}
+.detailed .cell-price a{font-weight:700;background:linear-gradient(90deg,var(--accent-2),var(--accent));-webkit-background-clip:text;background-clip:text;color:transparent}
+.detailed a{text-decoration:none}
+.detailed a:hover{text-decoration:underline}
+
+@media(max-width:760px){
+  .detailed thead th{font-size:0.95rem}
+  .detailed td{padding:12px}
+}
+
 /* round table header and footer cells to match table radius */
 .features thead th:first-child{border-top-left-radius:10px}
 .features thead th:last-child{border-top-right-radius:10px}
 .features tbody tr:last-child td:first-child{border-bottom-left-radius:10px}
 .features tbody tr:last-child td:last-child{border-bottom-right-radius:10px}
+
+/* detailed table corner rounding */
+.detailed thead th:first-child{border-top-left-radius:10px}
+.detailed thead th:last-child{border-top-right-radius:10px}
+.detailed tbody tr:last-child td:first-child{border-bottom-left-radius:10px}
+.detailed tbody tr:last-child td:last-child{border-bottom-right-radius:10px}
 
 /* responsive tweaks */
 @media(min-width:880px){
