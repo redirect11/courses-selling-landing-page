@@ -8,24 +8,34 @@
   --surface:#071029;
   --white:#ffffff;
   --radius:12px;
-  --container:1100px;
+  --container:1200px;
   font-family: 'Inter', system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
 }
 *{box-sizing:border-box}
-html,body{height:100%}
+html{height:auto}
 body{
   margin:0;
   color:var(--white);
-  background:linear-gradient(180deg,#071024 0%, #031027 100%);
+  /* unified background (radial + linear) */
+  background: radial-gradient(1200px 400px at 10% 10%, rgba(96,165,250,0.06), transparent),
+              radial-gradient(900px 300px at 90% 90%, rgba(110,231,183,0.04), transparent),
+              linear-gradient(180deg,#041028 0%, #021022 100%);
   -webkit-font-smoothing:antialiased;
   -moz-osx-font-smoothing:grayscale;
   line-height:1.45;
+  min-height: 100vh;
+  /* avoid content being vertically centered globally; use normal flow */
+  padding-bottom: 64px; /* space to avoid UI/toolbars cutting buttons */
+  overflow-y: auto; /* ensure page can scroll */
+  position: relative;
 }
 .container{max-width:var(--container);margin:0 auto;padding:24px}
 .header-inner{display:flex;align-items:center;gap:16px;justify-content:space-between}
 .brand{font-weight:700;color:var(--white);text-decoration:none}
 .nav{display:none}
 .site-header{position:sticky;top:0;background:transparent;padding:12px 0}
+/* make sure header stays above content but doesn't block scrolling */
+.site-header{z-index:20}
 .btn{display:inline-block;padding:10px 16px;border-radius:10px;text-decoration:none;border:0;cursor:pointer}
 .btn-primary{background:linear-gradient(90deg,var(--accent-2),var(--accent));color:#02203a;font-weight:700}
 .btn-cta{background:var(--accent);border-radius:999px;color:#02203a;font-weight:700}
@@ -48,16 +58,40 @@ body{
 .alt{background:linear-gradient(180deg, rgba(255,255,255,0.01), transparent)}
 .testimonials blockquote{background:rgba(255,255,255,0.02);padding:16px;border-radius:10px}
 .pricing{display:grid;grid-template-columns:1fr;gap:12px}
-.price-card{background:rgba(255,255,255,0.02);padding:18px;border-radius:12px}
+.price-card{background:rgba(255,255,255,0.02);padding:18px;border-radius:12px;text-align:center}
 .price-card.featured{border:1px solid rgba(255,255,255,0.06)}
 .cta{background:linear-gradient(90deg, rgba(96,165,250,0.08), rgba(110,231,183,0.06));border-radius:14px;padding:24px}
 .cta-inner{display:grid;gap:12px}
 .buy-form{display:flex;gap:8px;flex-wrap:wrap}
 .buy-form select{padding:10px;border-radius:10px;background:rgba(255,255,255,0.03);color:var(--white);border:1px solid rgba(255,255,255,0.04)}
 .buy-form input{padding:10px;border-radius:10px;border:1px solid rgba(255,255,255,0.04);background:rgba(255,255,255,0.02);color:var(--white)}
-.site-footer{padding:18px 0;border-top:1px solid rgba(255,255,255,0.02);color:var(--muted)}
+.site-footer{padding:18px 0;border-top:1px solid rgba(255,255,255,0.02);color:var(--muted);display: flex;flex-direction: column;align-items: center;justify-content: center;width:100%;clear:both}
 .footer-nav a{color:var(--muted);text-decoration:none;margin-left:12px}
 .modal{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(2,6,23,0.6);z-index:1000}
+.modal[hidden]{display:none}
+
+/* removed global centering to preserve normal document flow */
+
+
+/* Responsive video embed */
+.video-wrap{margin:20px 0}
+.video-container{position:relative;padding-top:56.25%;height:0;overflow:hidden;border-radius:12px}
+.video-container iframe{position:absolute;top:0;left:0;width:100%;height:100%;border:0}
+
+/* Table basic styles */
+.table-wrap{overflow-x:auto;margin:16px 0}
+.features{width:100%;max-width:980px;border-collapse:collapse;margin:0 auto}
+/* Ensure main content doesn't allow child elements to overflow off-screen */
+main{width:100%;max-width:var(--container);margin:0 auto;padding:0 16px;box-sizing:border-box}
+.features th,.features td{padding:12px;border:1px solid rgba(255,255,255,0.04);text-align:left}
+
+.pricing-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin:0 auto;margin-bottom:40px}
+.price-card{padding:18px;border-radius:12px;text-align:center}
+.price-card.featured{border:1px solid rgba(255,255,255,0.06)}
+
+@media(min-width:760px){
+  .pricing-grid{grid-template-columns:repeat(3,1fr)}
+}
 .modal-content{background:linear-gradient(180deg,#071229,#041227);padding:20px;border-radius:12px;max-width:420px;width:90%;text-align:center}
 .modal-close{position:absolute;right:16px;top:16px;background:transparent;border:0;color:var(--muted);font-size:16px}
 @media(min-width:760px){
@@ -67,6 +101,147 @@ body{
   .cards{grid-template-columns:repeat(3,1fr)}
   .pricing{grid-template-columns:1fr 1fr}
 }
-@media(min-width:1100px){
-  .container{padding:32px}
+@media(min-width:1200px){
+  .container{padding:0}
+}
+
+/* Modern styling improvements for 'Una Vita di Successo' */
+/* body background unified at top of file */
+
+#vita-successo{
+  padding:0px 0;
+}
+
+#vita-successo .container{max-width:980px}
+
+/* Title style: centered, modern and decorative */
+#vita-successo h1{
+  font-size:clamp(1.8rem,4.2vw,2.8rem);
+  margin:0 auto 8px;
+  line-height:1.05;
+  background:linear-gradient(90deg,var(--accent-2),var(--accent));
+  -webkit-background-clip:text;background-clip:text;color:transparent;font-weight:800;
+  text-align:center;
+  letter-spacing:0.01em;
+  position:relative;
+  padding-bottom:8px;
+  text-shadow:0 8px 28px rgba(2,6,23,0.45);
+}
+#vita-successo h1::after{
+  content:'';
+  display:block;
+  width:0px;
+  height:4px;
+  background:linear-gradient(90deg,var(--accent-2),var(--accent));
+  border-radius:999px;
+  margin:10px auto 0;
+  opacity:0.95;
+}
+#vita-successo p.muted{color:var(--muted);font-size:1.05rem;margin:20px auto 20px;text-align:center;max-width:760px}
+
+.video-container{border-radius:16px;box-shadow:0 12px 30px rgba(2,6,23,0.6);overflow:hidden;transform:translateZ(0);transition:transform .35s cubic-bezier(.2,.9,.3,1),box-shadow .35s}
+.video-container:hover{transform:translateY(-6px) scale(1.01);box-shadow:0 20px 50px rgba(2,6,23,0.7)}
+
+.features th{background:linear-gradient(90deg, rgba(96,165,250,0.08), rgba(110,231,183,0.06));font-weight:700}
+.features tr:nth-child(even) td{background:rgba(255,255,255,0.01)}
+.features td{font-size:0.95rem}
+
+.pricing-grid .price-card{padding:22px;border-radius:14px;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));backdrop-filter:blur(6px);transition:transform .25s,box-shadow .25s}
+.pricing-grid .price-card:hover{transform:translateY(-8px);box-shadow:0 18px 40px rgba(2,6,23,0.6)}
+.price-card h4{margin:0 0 8px;font-size:1.1rem}
+.price-card p.muted{margin:0 0 14px}
+
+.btn{transition:transform .15s ease,box-shadow .15s ease}
+.btn:hover{transform:translateY(-3px);box-shadow:0 8px 20px rgba(15,23,42,0.35)}
+
+.price-card.featured{background:linear-gradient(90deg, rgba(96,165,250,0.08), rgba(110,231,183,0.06));border:0}
+.price-card.featured .btn{background:linear-gradient(90deg,var(--accent-2),var(--accent));color:#02203a}
+
+.small.muted{color:var(--muted);font-size:0.95rem}
+
+/* Enhanced video section */
+.video-caption {
+  text-align: center;
+  font-size: 0.9rem;
+  margin-top: 8px;
+  color: var(--muted);
+}
+
+/* Improved table styles */
+.features th {
+  background: linear-gradient(90deg, rgba(96,165,250,0.08), rgba(110,231,183,0.06));
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+.features td {
+  font-size: 0.95rem;
+  padding: 12px 16px;
+}
+.features tr:nth-child(even) td {
+  background: rgba(255,255,255,0.02);
+}
+.features tr:hover td {
+  background: rgba(96,165,250,0.04);
+}
+
+/* Center all content on the page */
+body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  margin: 0;
+}
+
+/* Modernize and center the table */
+.table-wrap {
+  display: flex;
+  justify-content: center;
+  margin: 24px auto;
+}
+.features {
+  border: 2px solid rgba(96,165,250,0.2);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 8px 20px rgba(15,23,42,0.2);
+  /* ensure rounded corners render correctly on table */
+  border-collapse: separate;
+  border-spacing: 0;
+}
+.features th {
+  background: linear-gradient(90deg, rgba(96,165,250,0.2), rgba(110,231,183,0.2));
+  color: var(--white);
+  text-align: center;
+  padding: 16px;
+}
+.features td {
+  text-align: center;
+  padding: 14px;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+.features tr:last-child td {
+  border-bottom: none;
+}
+.features tr:hover td {
+  background: rgba(96,165,250,0.1);
+}
+
+/* round table header and footer cells to match table radius */
+.features thead th:first-child{border-top-left-radius:10px}
+.features thead th:last-child{border-top-right-radius:10px}
+.features tbody tr:last-child td:first-child{border-bottom-left-radius:10px}
+.features tbody tr:last-child td:last-child{border-bottom-right-radius:10px}
+
+/* responsive tweaks */
+@media(min-width:880px){
+  #vita-successo .container{padding:24px}
+  .video-container{height:auto}
+}
+
+@media(max-width:480px){
+  #vita-successo{padding:28px 12px}
+  .features th,.features td{padding:10px}
+  .price-card{padding:14px}
 }
